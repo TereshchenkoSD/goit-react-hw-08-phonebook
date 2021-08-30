@@ -1,5 +1,8 @@
-// import { useState, useEffect } from 'react';
-// import { v4 as uuidv4 } from 'uuid';
+// import { useEffect, Suspense } from 'react';
+
+// import { useDispatch, useSelector } from 'react-redux';
+
+// import { Switch } from 'react-router-dom';
 
 import ContactForm from './components/Form';
 
@@ -9,7 +12,7 @@ import Filter from './components/Filter';
 
 import Title from './components/Title';
 
-// import initialContacts from './data/contacts.json';
+// import Loader from './components/Loader/Loader';
 
 import { FormContainer } from './App.styles';
 
