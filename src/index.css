@@ -45,3 +45,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.navLink {
+  text-decoration: none;
+  color: rgb(68, 46, 46);
+  font-weight: 500;
+}
+
+.activeNavLink {
+  color: #000;
+  text-decoration: underline;
+}
