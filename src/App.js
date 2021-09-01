@@ -23,8 +23,8 @@ import { getIsFetchingCurrent } from './redux/selectors/authorizationSelectors';
 import Loader from './components/Loader/Loader';
 
 const HomeView = lazy(() => import('./views/HomeView'));
-const SignUpView = lazy(() => import('./views/SignUpView'));
-const SignInView = lazy(() => import('./views/SignInView.jsx'));
+const RegisterView = lazy(() => import('./views/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView'));
 const ContactsView = lazy(() => import('./views/ContactsView/ContactsView'));
 
 // import ContactForm from './components/Form';
@@ -58,10 +58,10 @@ export const App = () => {
                 <HomeView />
               </PublicRoute>
               <PublicRoute path="/register" restricted>
-                <SignUpView />
+                <RegisterView />
               </PublicRoute>
               <PublicRoute path="/login" restricted redirectTo="/contacts">
-                <SignInView />
+                <LoginView />
               </PublicRoute>
               <PrivateRoute path="/contacts" redirectTo="/login">
                 <ContactsView />
