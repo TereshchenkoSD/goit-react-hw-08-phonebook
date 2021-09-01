@@ -7,12 +7,12 @@ import Container from '@material-ui/core/Container';
 import Form from '../../components/Form/Form';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
-import { selectors } from '../../redux/contacts';
+import selectors from '../../redux/selectors/contactsSelectors';
 // import { RiContactsBook2Fill } from 'react-icons/ri';
-import { ContactTitle, ContactIcon } from './ContactView.module.css';
+import { ContactTitle, ContactIcon } from './ContactView.styles';
 
 export default function ContactsView(params) {
-  const loading = useSelector(selectors.getLoading);
+  const loading = useSelector(selectors.isLoading);
   return (
     <Container maxWidth="md" title="Phonebook">
       <ToastContainer autoClose={3000} />

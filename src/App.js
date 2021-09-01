@@ -1,81 +1,76 @@
-// import { useEffect, Suspense } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import { Switch } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
-import ContactForm from './components/Form';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-import ContactList from './components/ContactList';
+import { Switch } from 'react-router-dom';
 
-import Filter from './components/Filter';
+import { fetchCurrentUser } from './redux/operations/authorizationOperations';
 
-import Title from './components/Title';
+import Container from '@material-ui/core/Container';
 
-// import Loader from './components/Loader/Loader';
+import AppBar from './components/AppBar';
 
-import { FormContainer } from './App.styles';
+import PrivateRoute from './components/PrivateRoute';
+
+import PublicRoute from './components/PublicRoute';
+
+import { getIsFetchingCurrent } from './redux/selectors/authorizationSelectors';
+
+import Loader from './components/Loader/Loader';
+
+const HomeView = lazy(() => import('./views/HomeView'));
+const SignUpView = lazy(() => import('./views/SignUpView'));
+const SignInView = lazy(() => import('./views/SignInView.jsx'));
+const ContactsView = lazy(() => import('./views/ContactsView/ContactsView'));
+
+// import ContactForm from './components/Form';
+
+// import ContactList from './components/ContactList';
+
+// import Filter from './components/Filter';
+
+// import Title from './components/Title';
+
+// import { FormContainer } from './App.styles';
 
 export const App = () => {
-  // const [contacts, setContacts] = useState([]);
-  // const [filter, setFilter] = useState('');
+  const dispatch = useDispatch();
+  const isFetchingCurrent = useSelector(getIsFetchingCurrent);
 
-  // const addContact = (name, number) => {
-  //   if (
-  //     contacts.find(
-  //       contact => contact.name.toLowerCase() === name.toLowerCase(),
-  //     )
-  //   ) {
-  //     alert(`${name} is already in the contact list`);
-  //     return;
-  //   }
-  //   const contact = {
-  //     id: uuidv4(),
-  //     name,
-  //     number,
-  //   };
-
-  //   setContacts(contacts => [contact, ...contacts]);
-  // };
-
-  // useEffect(() => {
-  //   const savedContacts = localStorage.getItem('contacts');
-
-  //   const parsedContacts = JSON.parse(savedContacts);
-
-  //   if (parsedContacts) {
-  //     setContacts(parsedContacts);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-
-  // const deleteContact = contactId => {
-  //   setContacts(contacts.filter(contact => contact.id !== contactId));
-  // };
-
-  // const changeFilter = e => {
-  //   setFilter(e.currentTarget.value);
-  // };
-
-  // const getVisibleContacts = () => {
-  //   const normalizedFilter = filter.toLowerCase();
-
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(normalizedFilter),
-  //   );
-  // };
-
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
   return (
-    <FormContainer>
-      <Title text={'Phonebook'} />
-      <ContactForm />
-      <Title text={'Contacts'} />
-      <Filter />
-      <ContactList />
-    </FormContainer>
+    <Container maxWidth="md">
+      {isFetchingCurrent ? (
+        <Loader />
+      ) : (
+        <>
+          <AppBar />
+
+          <Switch>
+            <Suspense fallback={<Loader />}>
+              <PublicRoute exact path="/">
+                <HomeView />
+              </PublicRoute>
+              <PublicRoute path="/register" restricted>
+                <SignUpView />
+              </PublicRoute>
+              <PublicRoute path="/login" restricted redirectTo="/contacts">
+                <SignInView />
+              </PublicRoute>
+              <PrivateRoute path="/contacts" redirectTo="/login">
+                <ContactsView />
+              </PrivateRoute>
+            </Suspense>
+          </Switch>
+        </>
+      )}
+    </Container>
   );
 };
 
