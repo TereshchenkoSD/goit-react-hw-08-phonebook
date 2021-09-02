@@ -47,12 +47,23 @@ code {
 }
 
 .navLink {
+  font-family: 'Helvetica', sans-serif;
+  display: inline-block;
   text-decoration: none;
-  color: rgb(68, 46, 46);
-  font-weight: 500;
+  padding: 6px;
+  font-weight: 400;
+
+  font-size: 14px;
 }
 
 .activeNavLink {
-  color: #000;
-  text-decoration: underline;
+  font-family: 'Helvetica', sans-serif;
+  display: inline-block;
+  text-decoration: none;
+  padding: 6px;
+  font-weight: 400;
+
+  font-size: 14px;
+  color: #320fb1;
+  border-bottom: 5px solid #76c99f;
 }

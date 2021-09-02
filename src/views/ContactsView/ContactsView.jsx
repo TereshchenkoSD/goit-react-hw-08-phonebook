@@ -8,17 +8,15 @@ import Form from '../../components/Form/Form';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
 import selectors from '../../redux/selectors/contactsSelectors';
-// import { RiContactsBook2Fill } from 'react-icons/ri';
-import { ContactTitle, ContactIcon } from './ContactView.styles';
+import { ContactTitle } from './ContactView.styles';
 
 export default function ContactsView(params) {
   const loading = useSelector(selectors.isLoading);
   return (
     <Container maxWidth="md" title="Phonebook">
       <ToastContainer autoClose={3000} />
-      <ContactIcon size="50" />
-      <Form />
       <ContactTitle>Contacts</ContactTitle>
+      <Form />
       <Filter />
       <ContactList />
       {loading && (

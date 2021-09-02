@@ -9,6 +9,8 @@ export const Label = styled.label`
   flex-direction: column;
   max-width: 400px;
   margin-bottom: 15px;
+  margin-right: auto;
+  margin-left: auto;
 `;
 
 export const Input = styled.input`
@@ -29,6 +31,8 @@ export const Button = styled.button`
   justify-content: center;
 
   min-width: 200px;
+  margin-right: auto;
+  margin-left: auto;
   padding-top: 5px;
   padding-bottom: 5px;
 

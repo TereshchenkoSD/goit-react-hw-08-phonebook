@@ -5,6 +5,8 @@ export const FilterLabel = styled.label`
   flex-direction: column;
   max-width: 400px;
   margin-bottom: 15px;
+  margin-right: auto;
+  margin-left: auto;
 `;
 
 export const FilterInput = styled.input`
